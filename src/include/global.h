@@ -1,5 +1,11 @@
-#ifndef BANDCAMP_GLOBAL_H_
-#define BANDCAMP_GLOBAL_H_
+
+#ifndef HACKER_GLOBAL_H_
+#define HACKER_GLOBAL_H_
+
+#include <string>
+#include <iostream>
+#include <SDL.h>
+#include <SDL_image.h>
 
 constexpr int SCREEN_WIDTH = 800;
 constexpr int SCREEN_HEIGHT = 600;
@@ -17,4 +23,4 @@ namespace utils
     SDL_Texture* loadTexture(SDL_Renderer* renderer, std::string fname);
 };
 
-#endif  //  BANDCAMP_GLOBAL_H_
+#endif  //  HACKER_GLOBAL_H_

@@ -24,7 +24,8 @@ OBJ = $(patsubst src/%.cpp, obj/%.o, $(SRC))
 # it's the same in unix. 'twould mean our installs can be different and still coexist.
 
 ifeq ($(OS), Windows_NT)
-	DETECTED_OS = $(OS) -ggdb
+
+	DETECTED_OS = $(OS)
 	CC = g++ -std=c++11
 	CFLAGS = -c -IC:/mingwdev/include/SDL2
 	INCLUDE = -IC:/mingwdev/include/SDL2
@@ -37,6 +38,7 @@ else ifeq ($(shell uname -s), Darwin)
 	INCLUDE = -I/Library/Frameworks/SDL2.framework/Headers -I/Library/Frameworks/SDL2_image.framework/Headers -I/Library/Frameworks/SDL2_ttf.framework/Headers -F/Library/Frameworks/
 	LFLAGS = -framework SDL2 -framework SDL2_image -framework SDL2_ttf -o $(OUT) 
 	LFLAGScr = -framework SDL2 -framework SDL2_image -framework SDL2_ttf
+
 else
 	DETECTED_OS := $(shell uname -s)
 	CC = g++ -std=c++11 -ggdb
@@ -44,6 +46,7 @@ else
 	INCLUDE = -I/usr/include/SDL2 -lSDL2_ttf
 	LFLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf -o $(OUT)
 	LFLAGScr = -lSDL2 -lSDL2_image 
+
 endif
 
 .PHONY: all #credits

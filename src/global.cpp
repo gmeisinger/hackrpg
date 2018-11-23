@@ -1,5 +1,4 @@
 
-
 #include "include/global.h"
 
 int screen_w = SCREEN_WIDTH;
@@ -7,6 +6,7 @@ int screen_h = SCREEN_HEIGHT;
 int tile_s = TILE_SIZE;
 
 Player *player;
+
 
 //loads image at specified path as a texture
 //fname = relative path to image

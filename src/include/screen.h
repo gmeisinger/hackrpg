@@ -1,5 +1,6 @@
-#ifndef BANDCAMP_SCREEN_H_
-#define BANDCAMP_SCREEN_H_
+
+#ifndef HACKER_SCREEN_H_
+#define HACKER_SCREEN_H_
 
 #include <SDL.h>
 #include <vector>
@@ -10,12 +11,11 @@ extern int currentScreen;
 class Screen
 {
     private:
-		//std::vector<Object*> roomList;
+    	bool start;
 		SDL_Renderer* rendererReference;
 		
     public:
-		bool start;
-		SDL_Rect camera;
+    	SDL_Rect camera;
 		virtual void init(SDL_Renderer* renderer) = 0;
 		virtual void input(const Uint8* keystate) = 0;
 		virtual void update(Uint32 ticks) = 0;
@@ -23,4 +23,4 @@ class Screen
 		//EXIT METHOD??
 };
 
-#endif  //  BANDCAMP_SCREEN_H_
+#endif  //  HACKER_SCREEN_H_

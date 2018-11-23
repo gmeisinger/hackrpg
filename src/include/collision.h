@@ -1,5 +1,6 @@
-#ifndef BANDCAMP_COLLISION_H_
-#define BANDCAMP_COLLISION_H_
+
+#ifndef HACKER_COLLISION_H_
+#define HACKER_COLLISION_H_
 
 #include <iostream>
 #include <string>
@@ -16,4 +17,4 @@ namespace collision
     bool checkColTop(SDL_Rect rect, std::vector<std::vector<Tile*>> &grid, int tilesize);
     bool checkColBottom(SDL_Rect rect, std::vector<std::vector<Tile*>> &grid, int tilesize);
 };
-#endif
+#endif //HACKER_COLLISION_H_

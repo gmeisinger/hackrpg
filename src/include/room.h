@@ -1,5 +1,6 @@
-#ifndef BANDCAMP_ROOM_H_
-#define BANDCAMP_ROOM_H_
+
+#ifndef HACKER_ROOM_H_
+#define HACKER_ROOM_H_
 
 #include <SDL.h>
 #include <vector>
@@ -23,4 +24,4 @@ public:
 	std::vector<SDL_Rect> getIntersects();
 };
 
-#endif  //  BANDCAMP_ROOM_H_
+#endif  //  HACKER_ROOM_H_

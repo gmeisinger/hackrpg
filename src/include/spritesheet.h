@@ -1,5 +1,5 @@
-#ifndef BANDCAMP_SPRITESHEET_H_
-#define BANDCAMP_SPRITESHEET_H_
+#ifndef HACKER_SPRITESHEET_H_
+#define HACKER_SPRITESHEET_H_
 
 #include <SDL.h>
 #include <vector>
@@ -19,4 +19,4 @@ public:
     SDL_Texture* getTexture();
 };
 
-#endif  //  BANDCAMP_SPRITESHEET_H_
+#endif  //  HACKER_SPRITESHEET_H_

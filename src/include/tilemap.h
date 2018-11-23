@@ -1,5 +1,6 @@
-#ifndef BANDCAMP_TILEMAP_H_
-#define BANDCAMP_TILEMAP_H_
+
+#ifndef HACKER_TILEMAP_H_
+#define HACKER_TILEMAP_H_
 
 #include <SDL.h>
 #include <unordered_map>
@@ -35,11 +36,10 @@ public:
 	SDL_Renderer* draw(SDL_Renderer* render, SDL_Rect cam);
 	std::vector<std::vector<Tile*>> convert(std::vector<std::vector<int>> intmap);
 	void setNeighbors(Room* source);
-	void genRandomMap();
-	//void addObjects(std::unordered_map<std::string, Object*> &objectList);
+
+	void addObjects(std::unordered_map<std::string, Object*> *objectList);
 	//random map helpers
 	std::vector<Room*> getRooms();
-	//std::vector< std::vector < int > > &getGrid();
 };
 
-#endif  //  BANDCAMP_TILEMAP_H_
+#endif  // HACKER_TILEMAP_H_

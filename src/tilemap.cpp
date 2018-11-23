@@ -1,7 +1,6 @@
 #include <sstream>
 #include <iostream>
 #include "include/tilemap.h"
-#include "include/mazegenerationalgorithm.h"
 
 //constants
 constexpr int MAX_ROOM_SIZE = 15;
@@ -92,7 +91,8 @@ std::vector<Room*> Tilemap::getRooms() {
 SDL_Renderer* Tilemap::draw(SDL_Renderer* render, SDL_Rect cam) {
 	for(int row=0;row<height;row++) {
 		for(int col=0;col<width;col++) {
-			if(map[row][col]->isActive()) {
+
+			if(map[row][col]->isActive() && (col*tilesize - cam.x >= -tilesize) && (row*tilesize - cam.y >= -tilesize)) {
 				Tile* t = map[row][col];
 				SDL_Rect* src = t->getSource();
 				SDL_Rect dest = {(col*tilesize) - cam.x, (row*tilesize) - cam.y, tilesize, tilesize};
@@ -134,4 +134,5 @@ std::vector<std::vector<Tile*>> Tilemap::convert( std::vector<std::vector<int>> 
 		}
 	}
 	return map;
+
 }

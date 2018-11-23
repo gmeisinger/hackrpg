@@ -8,6 +8,7 @@ int curFrame;
 Uint32 frameTicks;
 bool playing, loop;
 
+
 Animation::Animation(std::vector<SDL_Rect> _frames) {
 	frames = _frames;
 	curFrame = 0;

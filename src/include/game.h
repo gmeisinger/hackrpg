@@ -1,11 +1,13 @@
-#ifndef BANDCAMP_GAME_H_
-#define BANDCAMP_GAME_H_
+
+#ifndef HACKER_GAME_H_
+#define HACKER_GAME_H_
 
 #include <SDL.h>
 #include <iostream>
 #include <vector>
 #include <string>
 #include "gsm.h"
+
 
 class GSM;
 
@@ -25,4 +27,5 @@ class Game {
 		void update(Uint32 ticks);
 		void draw();
 };
-#endif	//	BANDCAMP_GAME_H_
+
+#endif	//	HACKER_GAME_H_

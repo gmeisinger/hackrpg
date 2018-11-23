@@ -1,15 +1,7 @@
-/* Team Bandcamp
- * Class function: Contains core game funtions
- * 
-*/
+
 
 #include "include/game.h"
 #include "include/gsm.h"
-
-//int SCREEN_WIDTH = 800;
-//int SCREEN_HEIGHT = 600;
-//int TILE_SIZE = 32;
-
 
 //Starts new game
 Game::Game() {
@@ -17,6 +9,10 @@ Game::Game() {
 	gRenderer = nullptr;
 	running = false;
 	GSM * gsm;
+
+	screen_w = SCREEN_WIDTH;
+	screen_h = SCREEN_HEIGHT;
+	tile_s = TILE_SIZE;
 }
 
 /* Called from Main 
@@ -43,7 +39,8 @@ bool Game::init() {
 	 *   window height
 	 *   flags, see API for possible flags
 	 */
-	gWindow = SDL_CreateWindow("Bandcamp", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+
+	gWindow = SDL_CreateWindow("H@CKRP6", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 	if (gWindow == nullptr) {
 		std::cout << "Window could not be created! SDL_Error: " << SDL_GetError() << std::endl;
 		return  false;

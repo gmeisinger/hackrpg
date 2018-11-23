@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 #ifndef BANDCAMP_GSM_H_
 #define BANDCAMP_GSM_H_
+=======
+#ifndef HACKER_GSM_H_
+#define HACKER_GSM_H_
+>>>>>>> 62b64b920be81f85205c3d5be546fb8871f510ef
 
 #include <SDL.h>
 #include <cstdlib>
@@ -15,7 +20,6 @@ class GSM {
 		int previousScreen; //To check if we changed rooms
 		bool running;
 		SDL_Renderer* rendererReference;
-		Menu * testMenu;
 	public:
 		
 		GSM();
@@ -28,4 +32,5 @@ class GSM {
 		SDL_Renderer* draw(SDL_Renderer *renderer);
 
 };
-#endif	//	BANDCAMP_GSM_H_
+
+#endif	//	HACKER_GSM_H_

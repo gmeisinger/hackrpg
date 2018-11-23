@@ -1,20 +1,7 @@
-/* Team Bandcamp
- * Class function: Game state manger 
- * 
-*/
 
-#include "include/GSM.h"
-#include "include/credits.h"
-#include "include/randommap.h"
-#include "include/menu.h"
-
-#include "include/PauseMenu.h"
-
+#include "include/gsm.h"
 
 int GSM::currentScreen = 0;
-RandomMap randomMap;
-TestTransition_1 testTransitionScreen; 
-PauseMenu pauseMenu;
 bool pause;	//Is the game paused
 int tempScreen; //What was the room before you paused?
 
@@ -23,20 +10,8 @@ GSM::GSM(){
 	GSM::currentScreen = 0;	// Should describe this here 
 	
 	//Init Screens
-	//They all get passed the pointer to the
-	//Current Screen so they can change it when they see fit.
-	
-
-	testMenu = new Menu();
-	roomList.push_back(testMenu);
-	//testScreen = TestRoom();
-	//roomList.push_back(&testScreen);
-	testTransitionScreen = TestTransition_1();
-	roomList.push_back(&testTransitionScreen);
-	randomMap = RandomMap();
-	roomList.push_back(&randomMap);
 	pauseMenu = PauseMenu();
-	roomList.push_back(&pauseMenu);
+	roomList.push_back(&testScreen);
 	previousScreen = 0;
 	pause = false;
 	running = false;		// does this refer to the game running bool? its own from GSM.h

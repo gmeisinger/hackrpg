@@ -1,5 +1,6 @@
-#ifndef BANDCAMP_ANIMATION_H_
-#define BANDCAMP_ANIMATION_H_
+
+#ifndef HACKER_ANIMATION_H_
+#define HACKER_ANIMATION_H_
 
 #include <SDL.h>
 #include <vector>
@@ -30,4 +31,4 @@ class Animation
 		void setFrame(int _frame);
 };
 
-#endif  //  BANDCAMP_ANIMATION_H_
+#endif  //  HACKER_ANIMATION_H_
