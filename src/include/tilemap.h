@@ -17,7 +17,7 @@ class Tilemap
 {
 private:
 	SDL_Texture* image;
-	std::unordered_map<std::string, SDL_Rect> tiles;
+	std::unordered_map<int, SDL_Rect> tiles;
 	int width;
 	int height;
 	int tilesize;
@@ -26,7 +26,7 @@ private:
 	int cur_width;
 	int cur_height;
 public:
-	Tilemap(SDL_Texture* tex, int _width, int _height, int _tilesize);
+	Tilemap(SDL_Texture* tex, int _width, int _height);
 	Tilemap();
 	~Tilemap();
 	std::vector< std::vector < Tile* > > getMap();
@@ -40,6 +40,7 @@ public:
 	void addObjects(std::unordered_map<std::string, Object*> *objectList);
 	//random map helpers
 	std::vector<Room*> getRooms();
+
 };
 
 #endif  // HACKER_TILEMAP_H_

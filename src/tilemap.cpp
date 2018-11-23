@@ -27,7 +27,7 @@ Tilemap::Tilemap() {
 	image = nullptr;
 	width = 25;
 	height = 18;
-	tilesize = 32;
+	tilesize = TILE_SIZE;
 	rooms = {};
 	cur_width = 0;
 	cur_height = 0;
@@ -38,11 +38,11 @@ Tilemap::Tilemap() {
  * Argument  
  *
 */
-Tilemap::Tilemap(SDL_Texture* tex, int _width, int _height, int _tilesize) {
+Tilemap::Tilemap(SDL_Texture* tex, int _width, int _height) {
 	image = tex;
 	width = _width;
 	height = _height;
-	tilesize = _tilesize;
+	tilesize = TILE_SIZE;
 	rooms = {};
 	cur_width = 0;
 	cur_height = 0;
@@ -70,11 +70,10 @@ void Tilemap::init() {
 	map = std::vector<std::vector<Tile*>>(height, std::vector<Tile*>(width, new Tile()));
 	
 	//floor tile
-	tiles["floor"] = {0,0,tilesize,tilesize};
-	//ceiling tile
-	tiles["ceiling"] = {0,tilesize,tilesize,tilesize};
-	//wall tile
-	tiles["wall"] = {0,tilesize*2,tilesize,tilesize};
+	tiles[1] = {0,0,tilesize,tilesize};
+
+	std::vector<std::vector<int>> testmap = std::vector<std::vector<int>>(height, std::vector<Tile*>(width, 1));
+	setMap(testmap);
 }
 
 //sets the map
@@ -111,21 +110,21 @@ std::vector<std::vector<Tile*>> Tilemap::convert( std::vector<std::vector<int>> 
 			std::cout << intmap[r][c];
 			if(intmap[r][c] == 1) {
 				//floor tile
-				map[r][c] = new Tile(tiles["floor"], {c*tilesize, r*tilesize, tilesize, tilesize});
+				map[r][c] = new Tile(tiles[1], {c*tilesize, r*tilesize, tilesize, tilesize});
 			}
 			else if(intmap[r][c] == 2) {
 				// ceiling tile
-				map[r][c] = new Tile(tiles["ceiling"], {c*tilesize, r*tilesize, tilesize, tilesize});
+				map[r][c] = new Tile(tiles[1], {c*tilesize, r*tilesize, tilesize, tilesize});
 				map[r][c]->setBlocking(true);
 			}
 			else if(intmap[r][c] == 3) {
 				// wall tile
-				map[r][c] = new Tile(tiles["wall"], {c*tilesize, r*tilesize, tilesize, tilesize});
+				map[r][c] = new Tile(tiles[1], {c*tilesize, r*tilesize, tilesize, tilesize});
 				map[r][c]->setBlocking(true);
 			}
 			else if(intmap[r][c] == 4) {
 				// DOOR tile
-				map[r][c] = new Tile(tiles["floor"], {c*tilesize, r*tilesize, tilesize, tilesize});
+				map[r][c] = new Tile(tiles[1], {c*tilesize, r*tilesize, tilesize, tilesize});
 				map[r][c]->setDoor(true);
 			}
 			else {
@@ -136,3 +135,4 @@ std::vector<std::vector<Tile*>> Tilemap::convert( std::vector<std::vector<int>> 
 	return map;
 
 }
+

@@ -51,3 +51,10 @@ SDL_Rect* SpriteSheet::get(int _x, int _y) {
 std::vector<SDL_Rect> SpriteSheet::getRow(int _y) {
 	return clips[_y];
 }
+
+std::vector<SDL_Rect> SpriteSheet::getRange(int start, int end) {
+	std::vector<SDL_Rect>::const_iterator first = clips.begin() + start;
+	std::vector<SDL_Rect>::const_iterator last = clips.begin() + end;
+	std::vector<SDL_Rect> range(first, last);
+	return range;
+}

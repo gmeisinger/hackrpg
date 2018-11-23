@@ -20,6 +20,8 @@ GSM::GSM(){
 // Initialize GSM 
 void GSM::init(SDL_Renderer* reference){
 	std::cout << "Init GSM" << std::endl;
+	prect = {0,0,TILE_SIZE,TILE_SIZE};
+	player = new Player(prect);
 	//When Objects need to load their sprites, they will be passed this renderer
 	//As a reference for their init method.
 	rendererReference = reference;

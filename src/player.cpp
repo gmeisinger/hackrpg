@@ -36,8 +36,6 @@ Player::Player(SDL_Rect _rect) {
 	left = false;
 	right = false;
 	space = false;
-
-    player = this;
 }
 
 //
@@ -50,7 +48,7 @@ Player::~Player() {
 
 //
 std::string Player::getInstanceName(){
-	return "Player"; //There should only be one instance in the current room
+	return "player"; //There should only be one instance in the current room
 }
 
 /* Summary
@@ -61,12 +59,17 @@ void Player::init(SDL_Renderer* gRenderer){
 	rendererReference = gRenderer;
 	
 	//set up player animations
-	setSpriteSheet(utils::loadTexture(gRenderer, "res/spaceman.png"), 4, 4);
-	addAnimation("down", Animation(getSheet().getRow(0)));
-	addAnimation("up", Animation(getSheet().getRow(1)));
-	addAnimation("left", Animation(getSheet().getRow(2)));
-	addAnimation("right", Animation(getSheet().getRow(3)));
-	setAnimation("down");
+	setSpriteSheet(utils::loadTexture(gRenderer, "res/player.png"), 31, 1);
+    addAnimation("idle_left", Animation(getSheet().get(0)));
+    addAnimation("idle_right", Animation(getSheet().get(4)));
+    addAnimation("idle_down", Animation(getSheet().get(8)));
+	addAnimation("idle_up", Animation(getSheet().get(12)));
+    addAnimation("walk_left", Animation(getSheet().getRange(1,2)));
+    addAnimation("walk_right", Animation(getSheet().getRange(5,6)));
+    addAnimation("walk_down", Animation(getSheet().getRange(9,10)));
+	addAnimation("walk_up", Animation(getSheet().getRange(13,14)));
+	
+	setAnimation("idle_down");
 
 }
 
