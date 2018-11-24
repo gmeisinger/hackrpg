@@ -11,7 +11,7 @@
 # $< == first dependency, $^ == all dependencies, $@ == target
 
 # declaring paths for source files
-OUT = ./bandcamp
+OUT = ./hackrpg
 SRC = $(wildcard src/*.cpp wildcard AI/*.cpp)
 DEP = $(wildcard src/include/*.h wildcard AI/include/*.h)
 OBJ = $(patsubst src/%.cpp, obj/%.o, $(SRC))
@@ -43,8 +43,8 @@ else
 	DETECTED_OS := $(shell uname -s)
 	CC = g++ -std=c++11 -ggdb
 	CFLAGS = -c -I/usr/include/SDL2
-	INCLUDE = -I/usr/include/SDL2 -lSDL2_ttf
-	LFLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf -o $(OUT)
+	INCLUDE = -I/usr/include/SDL2
+	LFLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -o $(OUT)
 	LFLAGScr = -lSDL2 -lSDL2_image 
 
 endif
@@ -63,14 +63,12 @@ $(OUT): $(OBJ)
 obj/%.o: src/%.cpp $(DEP)
 	$(CC) $< $(CFLAGS) -o $@
 
-# additional features for small tests
-credits: src/credits.cpp
-	$(CC) $< $(INCLUDE) $(LFLAGScr) -o bin/credits
+# extras
 
 os:
 	@echo $(DETECTED_OS)
 
 clean:
 	rm obj/*.o
-	rm bandcamp
-	rm bandcamp.exe
+	rm hackrpg
+	rm hackrpg.exe

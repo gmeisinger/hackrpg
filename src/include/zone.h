@@ -8,6 +8,7 @@
 #include "screen.h"
 #include "object.h"
 #include "tilemap.h"
+#include "player.h"
 
 extern int currentScreen;
 

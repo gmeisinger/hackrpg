@@ -11,7 +11,6 @@
 #include "object.h"
 #include "spritesheet.h"
 #include "animation.h"
-#include "global.h"
 
 class Player : public Object
 {
@@ -29,7 +28,7 @@ class Player : public Object
 		bool space;
 
 	    SpriteSheet sheet;
-        std::unordered_map<std::string, Animation> anims;
+        std::unordered_map<std::string, Animation*> anims;
         Animation* anim;
 		SDL_Renderer* rendererReference;
 		
@@ -55,7 +54,7 @@ class Player : public Object
         SDL_Rect* getRect();
         SDL_Rect* getHitRect();
 
-        void addAnimation(std::string tag, Animation anim);
+        void addAnimation(std::string tag, Animation* anim);
         Animation* getAnimation(std::string tag);
         void setAnimation(std::string tag);
         void updateAnimation(Uint32 ticks);

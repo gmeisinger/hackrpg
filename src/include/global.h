@@ -9,7 +9,7 @@
 
 constexpr int SCREEN_WIDTH = 800;
 constexpr int SCREEN_HEIGHT = 600;
-constexpr int TILE_SIZE = 32;
+constexpr int TILE_SIZE = 64;
 
 extern int screen_w;
 extern int screen_h;

@@ -2,10 +2,6 @@
 #include <iostream>
 #include "include/tilemap.h"
 
-//constants
-constexpr int MAX_ROOM_SIZE = 15;
-constexpr int MIN_ROOM_SIZE = 7;
-
 //vars
 SDL_Texture* image;
 std::unordered_map<int, SDL_Rect> tiles;
@@ -20,15 +16,13 @@ int height;
 int tilesize;
 int cur_width;
 int cur_height;
-std::vector< std::vector < Tile* > > map;
-
+std::vector< std::vector < Tile* > >map;
 //constructor
 Tilemap::Tilemap() {
 	image = nullptr;
 	width = 25;
 	height = 18;
-	tilesize = TILE_SIZE;
-	rooms = {};
+	tilesize = tile_s;
 	cur_width = 0;
 	cur_height = 0;
 	srand(time(NULL));
@@ -38,12 +32,11 @@ Tilemap::Tilemap() {
  * Argument  
  *
 */
-Tilemap::Tilemap(SDL_Texture* tex, int _width, int _height) {
+Tilemap::Tilemap(SDL_Texture* tex, int _width, int _height, int _tilesize) {
 	image = tex;
 	width = _width;
 	height = _height;
-	tilesize = TILE_SIZE;
-	rooms = {};
+	tilesize = _tilesize;
 	cur_width = 0;
 	cur_height = 0;
 	srand(time(NULL));
@@ -72,18 +65,8 @@ void Tilemap::init() {
 	//floor tile
 	tiles[1] = {0,0,tilesize,tilesize};
 
-	std::vector<std::vector<int>> testmap = std::vector<std::vector<int>>(height, std::vector<Tile*>(width, 1));
-	setMap(testmap);
-}
-
-//sets the map
-// takes a 2d vector
-void Tilemap::setMap(std::vector< std::vector < int > > _map) {
-	map = convert(_map);
-}
-
-std::vector<Room*> Tilemap::getRooms() {
-	return rooms;
+	std::vector<std::vector<int>> testmap = std::vector<std::vector<int>>(height, std::vector<int>(width, 1));
+	convert(testmap);
 }
 
 //draw the tiles
@@ -91,14 +74,15 @@ SDL_Renderer* Tilemap::draw(SDL_Renderer* render, SDL_Rect cam) {
 	for(int row=0;row<height;row++) {
 		for(int col=0;col<width;col++) {
 
-			if(map[row][col]->isActive() && (col*tilesize - cam.x >= -tilesize) && (row*tilesize - cam.y >= -tilesize)) {
+			if(map[row][col]->isActive() && (col*TILE_SIZE - cam.x >= -TILE_SIZE) && (row*TILE_SIZE - cam.y >= -TILE_SIZE)) {
 				Tile* t = map[row][col];
 				SDL_Rect* src = t->getSource();
-				SDL_Rect dest = {(col*tilesize) - cam.x, (row*tilesize) - cam.y, tilesize, tilesize};
+				SDL_Rect dest = {(col*TILE_SIZE) - cam.x, (row*TILE_SIZE) - cam.y, TILE_SIZE, TILE_SIZE};
 				SDL_RenderCopy(render, image, src, &dest);
 			}
 		}
 	}
+	
 	return render;
 }
 
@@ -136,3 +120,18 @@ std::vector<std::vector<Tile*>> Tilemap::convert( std::vector<std::vector<int>> 
 
 }
 
+void Tilemap::addLayer(std::vector<std::vector<Tile*>> layer) {
+	//map.push_back(layer);
+}
+
+std::vector<std::vector<Tile*>> Tilemap::parseTiledMap() {
+	std::vector<std::vector<Tile*>> layers = {};
+	/*PLAN:
+	1. get the needed strings by 
+		string::size_type position = text.find ("keyword");
+		string fragment = text.substr (6, 5);
+    		// start at 6, take 5 characters
+    		text.erase(5, 5);
+    		text.replace(5, 2, "blah");
+	*/
+}

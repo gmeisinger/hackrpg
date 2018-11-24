@@ -9,7 +9,7 @@
 
 constexpr int MAX_SPEED = 2;
 constexpr int BORDER_SIZE = 32;
-constexpr int SHORTEN_DIST = 6;
+constexpr int SHORTEN_DIST = 8;
 
 SDL_Rect playerRect;
 SDL_Rect hitRect;
@@ -36,6 +36,8 @@ Player::Player(SDL_Rect _rect) {
 	left = false;
 	right = false;
 	space = false;
+
+    player = this;
 }
 
 //
@@ -59,17 +61,14 @@ void Player::init(SDL_Renderer* gRenderer){
 	rendererReference = gRenderer;
 	
 	//set up player animations
-	setSpriteSheet(utils::loadTexture(gRenderer, "res/player.png"), 31, 1);
-    addAnimation("idle_left", Animation(getSheet().get(0)));
-    addAnimation("idle_right", Animation(getSheet().get(4)));
-    addAnimation("idle_down", Animation(getSheet().get(8)));
-	addAnimation("idle_up", Animation(getSheet().get(12)));
-    addAnimation("walk_left", Animation(getSheet().getRange(1,2)));
-    addAnimation("walk_right", Animation(getSheet().getRange(5,6)));
-    addAnimation("walk_down", Animation(getSheet().getRange(9,10)));
-	addAnimation("walk_up", Animation(getSheet().getRange(13,14)));
+	setSpriteSheet(utils::loadTexture(gRenderer, "res/player-large.png"), 36, 1);
+
+    addAnimation("left", new Animation(getSheet().getRange(0,3)));
+    addAnimation("right", new Animation(getSheet().getRange(5,8)));
+    addAnimation("down", new Animation(getSheet().getRange(10,13)));
+	addAnimation("up", new Animation(getSheet().getRange(15,18)));
 	
-	setAnimation("idle_down");
+	setAnimation("down");
 
 }
 
@@ -94,7 +93,7 @@ SpriteSheet Player::getSheet() {
  * Argument  
  *
 */
-void Player::addAnimation(std::string tag, Animation anim) {
+void Player::addAnimation(std::string tag, Animation *anim) {
     anims[tag] = anim;
 }
 
@@ -103,7 +102,7 @@ void Player::addAnimation(std::string tag, Animation anim) {
  *
 */
 Animation* Player::getAnimation(std::string tag) {
-    return &anims[tag];
+    return anims[tag];
 }
 
 /* Summary
@@ -111,7 +110,7 @@ Animation* Player::getAnimation(std::string tag) {
  *
 */
 void Player::setAnimation(std::string tag) {
-    anim = &anims[tag];
+    anim = anims[tag];
 }
 
 //returns width of Player
@@ -303,23 +302,16 @@ bool Player::isUsed() {
     return false;
 }
 
-/* Summary
- * Argument  
- *
-*/
-void Player::setEnemy(bool _overlap) {
-    overlapEnemy = _overlap;
-}
 
 void Player::checkCollision(int curX, int curY, std::vector<std::vector<Tile*>> &grid)
 
 {
-    if(collision::checkColLeft(hitRect, grid, 32) || collision::checkColRight(hitRect, grid, 32)) {
+    if(collision::checkColLeft(hitRect, grid, TILE_SIZE) || collision::checkColRight(hitRect, grid, TILE_SIZE)) {
         playerRect.x = curX;
         hitRect.x = curX + SHORTEN_DIST/2;
     }
     
-    if(collision::checkColTop(hitRect, grid, 32) || collision::checkColBottom(hitRect, grid, 32)) {
+    if(collision::checkColTop(hitRect, grid, TILE_SIZE) || collision::checkColBottom(hitRect, grid, TILE_SIZE)) {
         playerRect.y = curY;
         hitRect.y = curY+SHORTEN_DIST;
 
@@ -327,7 +319,7 @@ void Player::checkCollision(int curX, int curY, std::vector<std::vector<Tile*>> 
         hitRect.x += x_vel;
 
         y_vel = 0;
-        if(collision::checkColLeft(hitRect, grid, 32) || collision::checkColRight(hitRect, grid, 32)) {
+        if(collision::checkColLeft(hitRect, grid, TILE_SIZE) || collision::checkColRight(hitRect, grid, TILE_SIZE)) {
             x_vel = 0; 
             playerRect.x = curX;
             hitRect.x = curX + SHORTEN_DIST/2;   
@@ -335,15 +327,4 @@ void Player::checkCollision(int curX, int curY, std::vector<std::vector<Tile*>> 
         }
     }
     
-}
-
-/* Summary
- * Argument  
- *
-*/
-void Player::checkEnemy(int _xdv, int _ydv){
-    if(overlapEnemy){
-        x_vel -= x_vel/2;
-        y_vel -= y_vel/2;
-    }
 }

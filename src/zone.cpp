@@ -1,16 +1,17 @@
 #include "include/zone.h"
 
 Zone::Zone() {
-
 }
 
-void Zone::init() {
+void Zone::init(SDL_Renderer* reference) {
+
 	objectList["player"] = player;
 
 	rendererReference = reference;
 
-	tilemap = Tilemap(utils::loadTexture(reference, "res/tiles.png"), 40, 40);
+	tilemap = Tilemap(utils::loadTexture(reference, "res/tiles.png"), 40, 40, 32);
 	tilemap.init();
+	camera = {player->getX() - SCREEN_WIDTH/2, player->getY() - SCREEN_HEIGHT/2, SCREEN_WIDTH, SCREEN_HEIGHT};
 }
  
 void Zone::input(const Uint8* keystate){
@@ -36,8 +37,8 @@ void Zone::update(Uint32 ticks) {
 	}
 
 	//update camera to player position
-	camera.x = p.getX() - (camera.w/2);
-	camera.y = p.getY() - (camera.h/2);
+	camera.x = player->getX() - (camera.w/2);
+	camera.y = player->getY() - (camera.h/2);
 }
 
 SDL_Renderer* Zone::draw(SDL_Renderer *renderer) {

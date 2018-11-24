@@ -16,6 +16,7 @@ public:
     void setClips(int _cols, int _rows, int _width, int _height);
     SDL_Rect* get(int _x, int _y);
     std::vector<SDL_Rect> getRow(int _y);
+    std::vector<SDL_Rect> getRange(int start, int end);
     SDL_Texture* getTexture();
 };
 
