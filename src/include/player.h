@@ -38,7 +38,7 @@ class Player : public Object
         ~Player();
 		std::string getInstanceName();
 		void init(SDL_Renderer* gRenderer);
-		void update(std::unordered_map<std::string, Object*> &objectList, std::vector<std::vector<Tile*>> &grid, Uint32 ticks);
+		void update(std::unordered_map<std::string, Object*> &objectList, std::vector<std::vector<std::vector<Tile*>>> &grid, Uint32 ticks);
 		void input(const Uint8* keystate);
 		SDL_Renderer* draw(SDL_Renderer* gRenderer, SDL_Rect cam);
 		void setSpriteSheet(SDL_Texture* _sheet, int _cols, int _rows);
@@ -46,7 +46,7 @@ class Player : public Object
         void updatePosition();
         void checkBounds(int max_width, int max_height);
 
-        void checkCollision(int curX, int curY, std::vector<std::vector<Tile*>> &grid);
+        void checkCollision(int curX, int curY, std::vector<std::vector<std::vector<Tile*>>> &grid);
         int getWidth();
         int getHeight();
         int getX();

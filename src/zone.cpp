@@ -9,8 +9,8 @@ void Zone::init(SDL_Renderer* reference) {
 
 	rendererReference = reference;
 
-	tilemap = Tilemap(utils::loadTexture(reference, "res/tiles.png"), 40, 40, 32);
-	tilemap.init();
+	tilemap = Tilemap("res/zones/testarea.json");
+	tilemap.init(reference);
 	camera = {player->getX() - SCREEN_WIDTH/2, player->getY() - SCREEN_HEIGHT/2, SCREEN_WIDTH, SCREEN_HEIGHT};
 }
  
