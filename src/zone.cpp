@@ -9,7 +9,7 @@ void Zone::init(SDL_Renderer* reference) {
 
 	rendererReference = reference;
 
-	tilemap = Tilemap("res/zones/testarea.json");
+	tilemap = Tilemap("res/zones/neighborhood.json");
 	tilemap.init(reference);
 	camera = {player->getX() - SCREEN_WIDTH/2, player->getY() - SCREEN_HEIGHT/2, SCREEN_WIDTH, SCREEN_HEIGHT};
 }

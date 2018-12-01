@@ -40,6 +40,7 @@ public:
 	std::vector<std::vector<Tile*>> convert(std::vector<std::vector<int>> intmap);
 	std::vector<std::vector<Tile*>> convert(std::vector<int> intmap);
 	void addLayer(std::vector<std::vector<Tile*>> layer);
+	void parseTileset(SDL_Renderer* reference, std::string fname);
 	void parseTiledMap(SDL_Renderer* reference, std::string fname);
 	void setWidth(int w);
 	void setHeight(int h);

@@ -100,6 +100,7 @@ std::unordered_map<std::string,std::string> JSONReader::getAttributes() {
 }
 
 int JSONReader::parseInt(std::string val) {
+	//std::cout << val << std::endl;
 	return std::stoi(val);
 }
 
@@ -246,8 +247,8 @@ std::vector<std::unordered_map<std::string, std::string>> JSONReader::parseMapVe
 				val_end = map_string.find_first_of(", ", val_start);
 			}
 			val = map_string.substr(val_start, val_end - val_start + 1);
-			if(!val.substr(val.length() -1, 1).compare(",")) {
-				val.erase(val.length() -1, 1);
+			if(!val.substr(val.length() -2, 1).compare(",")) {
+				val.erase(val.length() -2, 1);
 			}
 			//std::cout << key << std::endl;
 			//std::cout << val << std::endl;

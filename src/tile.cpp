@@ -22,14 +22,15 @@ Tile::Tile(const Tile& t) {
 	this->blocking = t.blocking;
 	this->door = t.door;
 	this->properties = t.properties;
+	this->id = t.id;
 }
 
-Tile::Tile(Tile *t) {
-	srcRect = *t->getSource();
-	active = true;
-	door = false;
-	blocking = false;
-	properties = t->getProperties();
+void Tile::setId(int i) {
+	id = i;
+}
+
+int Tile::getId() {
+	return id;
 }
 
 SDL_Rect* Tile::getSource() {
@@ -45,6 +46,16 @@ void Tile::setDest(SDL_Rect rect) {
 	srcRect.y = rect.y;
 	srcRect.w = rect.w;
 	srcRect.h = rect.h;
+}
+
+bool Tile::hasProperty(std::string prop) {
+	auto found = properties.find(prop);
+	if(found == properties.end()) {
+		return false;
+	}
+	else {
+		return true;
+	}
 }
 
 bool Tile::isBlocking() {
@@ -82,4 +93,11 @@ std::string Tile::getProperty(std::string key) {
 
 std::unordered_map<std::string,std::string> Tile::getProperties() {
 	return properties;
+}
+
+void Tile::printProperties() {
+	std::cout << "Tile: " << id << std::endl;
+	for(auto kv : properties) {
+		std::cout << kv.first << "  " << kv.second << std::endl;
+	}
 }

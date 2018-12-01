@@ -34,6 +34,7 @@ public:
     void addProperty(int index, std::string key, std::string val);
     Tile* get(int i);
     SDL_Texture* getImage();
+    void printIDs();
 };
 
 #endif  //  HACKER_TILESET_H_

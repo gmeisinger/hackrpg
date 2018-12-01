@@ -7,7 +7,7 @@
 #include "include/collision.h"
 #include "include/spritesheet.h"
 
-constexpr int MAX_SPEED = 2;
+constexpr int MAX_SPEED = 3;
 constexpr int BORDER_SIZE = 32;
 constexpr int SHORTEN_DIST = 8;
 
@@ -25,7 +25,7 @@ int y_vel;
 //Constructor - takes a texture, width and height
 Player::Player(SDL_Rect _rect) {
     playerRect = _rect;
-    hitRect = {playerRect.x + SHORTEN_DIST/2, playerRect.y +SHORTEN_DIST, playerRect.w - SHORTEN_DIST/2, playerRect.h - SHORTEN_DIST};
+    hitRect = {playerRect.x + 2*SHORTEN_DIST, playerRect.y +SHORTEN_DIST, playerRect.w - 4*SHORTEN_DIST, playerRect.h - SHORTEN_DIST};
     x_deltav = 0;
     y_deltav = 0;
     x_vel = 0;
@@ -303,12 +303,15 @@ bool Player::isUsed() {
 }
 
 
-void Player::checkCollision(int curX, int curY, std::vector<std::vector<std::vector<Tile*>>> &grid)
-
-{
+void Player::checkCollision(int curX, int curY, std::vector<std::vector<std::vector<Tile*>>> &grid) {
+    int nx = hitRect.x/TILE_SIZE;
+    int ny = hitRect.y/TILE_SIZE;
+    for(auto layer : grid) {
+        layer[ny][nx]->printProperties();
+    }
     if(collision::checkColLeft(hitRect, grid, TILE_SIZE) || collision::checkColRight(hitRect, grid, TILE_SIZE)) {
         playerRect.x = curX;
-        hitRect.x = curX + SHORTEN_DIST/2;
+        hitRect.x = curX + 2*SHORTEN_DIST;
     }
     
     if(collision::checkColTop(hitRect, grid, TILE_SIZE) || collision::checkColBottom(hitRect, grid, TILE_SIZE)) {
@@ -322,7 +325,7 @@ void Player::checkCollision(int curX, int curY, std::vector<std::vector<std::vec
         if(collision::checkColLeft(hitRect, grid, TILE_SIZE) || collision::checkColRight(hitRect, grid, TILE_SIZE)) {
             x_vel = 0; 
             playerRect.x = curX;
-            hitRect.x = curX + SHORTEN_DIST/2;   
+            hitRect.x = curX + 2*SHORTEN_DIST;   
 
         }
     }

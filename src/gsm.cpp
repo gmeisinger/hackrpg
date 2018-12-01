@@ -20,7 +20,7 @@ void GSM::init(SDL_Renderer* reference){
 	//As a reference for their init method.
 	rendererReference = reference;
 
-	SDL_Rect prect = {0,0,TILE_SIZE,TILE_SIZE};
+	SDL_Rect prect = {2*TILE_SIZE,6*TILE_SIZE,TILE_SIZE,TILE_SIZE};
 	Player *p = new Player(prect);
 	p->init(reference);
 
