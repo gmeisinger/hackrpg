@@ -37,6 +37,8 @@ public:
 	//void setMap(std::vector<std::vector< std::vector < int > > > _map);
 	void init(SDL_Renderer* reference);
 	SDL_Renderer* draw(SDL_Renderer* render, SDL_Rect cam);
+	int numLayers();
+	SDL_Renderer* drawLayer(SDL_Renderer* render, SDL_Rect cam, int layer);
 	std::vector<std::vector<Tile*>> convert(std::vector<std::vector<int>> intmap);
 	std::vector<std::vector<Tile*>> convert(std::vector<int> intmap);
 	void addLayer(std::vector<std::vector<Tile*>> layer);

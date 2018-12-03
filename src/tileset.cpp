@@ -22,6 +22,7 @@ void Tileset::init(SDL_Renderer* reference) {
 	}
 	tiles[0] = new Tile();
 	tiles[0]->setId(0);
+	tiles[0]->setBlocking(true);
 }
 
 void Tileset::init(SDL_Renderer* reference, int imgWidth, int imgHeight, int tWidth, int tHeight, int cols, int count) {

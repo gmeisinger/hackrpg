@@ -3,6 +3,7 @@
 #define HACKER_ZONE_H_
 
 #include <SDL.h>
+#include <string>
 #include <vector>
 #include <unordered_map>
 #include "screen.h"
@@ -16,11 +17,13 @@ class Zone : public Screen
 {
     private:
     	bool start;
+    	std::string map_file;
 		SDL_Renderer* rendererReference;
 		Tilemap tilemap;
 		std::unordered_map<std::string, Object*> objectList;
     public:
     	Zone();
+    	Zone(std::string mfile);
     	SDL_Rect camera;
 		void init(SDL_Renderer* renderer);
 		void input(const Uint8* keystate);

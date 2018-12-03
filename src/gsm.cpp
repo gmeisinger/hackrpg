@@ -4,9 +4,11 @@
 bool pause;	//Is the game paused
 int tempScreen; //What was the room before you paused?
 
+std::string GSM::globalScreen = "neighborhood";
+
 // Game state manager 
 GSM::GSM(){
-	curScreen = "test";	// Should describe this here 
+	curScreen = "neighborhood";	// Should describe this here 
 	
 	pause = false;
 	running = false;		// does this refer to the game running bool? its own from GSM.h
@@ -20,13 +22,14 @@ void GSM::init(SDL_Renderer* reference){
 	//As a reference for their init method.
 	rendererReference = reference;
 
+	//Init player
 	SDL_Rect prect = {2*TILE_SIZE,6*TILE_SIZE,TILE_SIZE,TILE_SIZE};
 	Player *p = new Player(prect);
 	p->init(reference);
 
 	//Init Screens
-	Zone *test = new Zone();
-	screens["test"] = test;
+	Zone *level_one = new Zone("neighborhood");
+	screens["neighborhood"] = level_one;
 	
 	screens[curScreen]->init(reference);
 	running = true;
@@ -35,8 +38,11 @@ void GSM::init(SDL_Renderer* reference){
 // Update the GSM state 
 void GSM::update(Uint32 ticks){
 	//previousScreen = GSM::currentScreen;
+	if(curScreen.compare(GSM::globalScreen) != 0) {
+		std::cout << "screen changed to : " << GSM::globalScreen << std::endl;
+	}
 
-	screens["test"]->update(ticks);
+	screens[curScreen]->update(ticks);
 	
 	//Checking if we changed screens this loop
 	//If so, then call the init to the new screen.
@@ -59,7 +65,7 @@ void GSM::update(Uint32 ticks){
 // 
 SDL_Renderer* GSM::draw(SDL_Renderer *renderer){
 	
-	renderer = screens["test"]->draw(renderer);
+	renderer = screens[curScreen]->draw(renderer);
 	
 	return renderer;	
 }
@@ -67,5 +73,5 @@ SDL_Renderer* GSM::draw(SDL_Renderer *renderer){
 // 
 void GSM::input(const Uint8* keystate){
 
-	screens["test"]->input(keystate);
+	screens[curScreen]->input(keystate);
 }

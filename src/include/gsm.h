@@ -16,16 +16,16 @@
 class GSM {
 	private:
 		std::unordered_map<std::string,Screen*> screens;
-		int previousScreen; //To check if we changed rooms
 		bool running;
 		SDL_Renderer* rendererReference;
+		std::string curScreen;
+		//std::string previousScreen;
 		//Player *p;
 	public:
 		
 		GSM();
 		//~GSM();
-		std::string curScreen;
-		
+		static std::string globalScreen;
 		void init(SDL_Renderer *renderer);
 		void input(const Uint8* keystate);
 		void update(Uint32 ticks);

@@ -65,6 +65,24 @@ SDL_Renderer* Tilemap::draw(SDL_Renderer* render, SDL_Rect cam) {
 	return render;
 }
 
+SDL_Renderer* Tilemap::drawLayer(SDL_Renderer* render, SDL_Rect cam, int layer) {
+	for(int row=0;row<height;row++) {
+		for(int col=0;col<width;col++) {
+
+			if(map[layer][row][col]->isActive() && (col*TILE_SIZE - cam.x >= -TILE_SIZE) && (row*TILE_SIZE - cam.y >= -TILE_SIZE)) {
+				Tile* t = map[layer][row][col];
+				SDL_Rect* src = t->getSource();
+				SDL_Rect dest = {(col*TILE_SIZE) - cam.x, (row*TILE_SIZE) - cam.y, TILE_SIZE, TILE_SIZE};
+				SDL_RenderCopy(render, tileset.getImage(), src, &dest);
+			}
+		}
+	}
+}
+
+int Tilemap::numLayers() {
+	return map.size();
+}
+
 std::vector<std::vector<Tile*>> Tilemap::convert( std::vector<std::vector<int>> intmap) {
 
 
